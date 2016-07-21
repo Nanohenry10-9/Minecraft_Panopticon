@@ -3,6 +3,22 @@ mc = Minecraft.create()
 from time import sleep
 from random import randint
 
+mc.setting("world_immutable", False)
+
+class player:
+    class plr1:
+        role = 1
+    class plr2:
+        role = 2
+    class plr3:
+        role = 3
+    class plr4:
+        role = 4
+    class plr5:
+        role = 5
+    class plr6:
+        role = 6
+
 mc.events.clearAll()
 
 redsUsed = 0
@@ -61,13 +77,13 @@ def checkBlocks1():
     elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 0:
         visibleLayers1 = 2
         i = 0
-        while (i < 4):
+        while (i < 3):
             mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
             i = i + 1
     elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 0:
         visibleLayers1 = 3
         i = 0
-        while (i < 7):
+        while (i < 6):
             mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
             i = i + 1
     elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 35:
