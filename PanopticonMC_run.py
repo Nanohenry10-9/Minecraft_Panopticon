@@ -8,16 +8,172 @@ mc.setting("world_immutable", False)
 class player:
     class plr1:
         role = 1
+        numOfBlocks = 0
+        class roleInfo:
+            class BH:
+                x = -234
+                y = 69
+                z = -10
+            class GH:
+                x = -235
+                y = 69
+                z = -11
+            class Ac:
+                x = -237
+                y = 69
+                z = -11
+            class NGO:
+                x = -237
+                y = 69
+                z = -9
+            class AV:
+                x = -236
+                y = 69
+                z = -10
+            class Tr:
+                x = -235
+                y = 69
+                z = -9
     class plr2:
         role = 2
+        numOfBlocks = 0
+        class roleInfo:
+            class BH:
+                x = -239
+                y = 69
+                z = -20
+            class GH:
+                x = -240
+                y = 69
+                z = -19
+            class Ac:
+                x = -241
+                y = 69
+                z = -20
+            class NGO:
+                x = -239
+                y = 69
+                z = 18
+            class AV:
+                x = -238
+                y = 69
+                z = -19
+            class Tr:
+                x = -240
+                y = 69
+                z = -21
     class plr3:
         role = 3
+        numOfBlocks = 0
+        class roleInfo:
+            class BH:
+                x = -248
+                y = 69
+                z = -19
+            class GH:
+                x = -249
+                y = 69
+                z = -20
+            class Ac:
+                x = -247
+                y = 69
+                z = -20
+            class NGO:
+                x = -248
+                y = 69
+                z = -21
+            class AV:
+                x = -250
+                y = 69
+                z = -19
+            class Tr:
+                x = -249
+                y = 69
+                z = -18
     class plr4:
         role = 4
+        numOfBlocks = 0
+        class roleInfo:
+            class BH:
+                x = -252
+                y = 69
+                z = -11
+            class GH:
+                x = -253
+                y = 69
+                z = -10
+            class Ac:
+                x = -254
+                y = 69
+                z = -11
+            class NGO:
+                x = -253
+                y = 69
+                z = -12
+            class AV:
+                x = -252
+                y = 69
+                z = -13
+            class Tr:
+                x = -254
+                y = 69
+                z = -13
     class plr5:
         role = 5
+        numOfBlocks = 0
+        class roleInfo:
+            class BH:
+                x = -248
+                y = 69
+                z = -5
+            class GH:
+                x = -249
+                y = 69
+                z = -4
+            class Ac:
+                x = -249
+                y = 69
+                z = -6
+            class NGO:
+                x = -250
+                y = 69
+                z = -5
+            class AV:
+                x = -250
+                y = 69
+                z = -7
+            class Tr:
+                x = -251
+                y = 69
+                z = -6
     class plr6:
         role = 6
+        numOfBlocks = 0
+        class roleInfo:
+            class BH:
+                x = 239
+                y = 69
+                z = -5
+            class GH:
+                x = -240
+                y = 69
+                z = -7
+            class Ac:
+                x = -239
+                y = 67
+                z = -5
+            class NGO:
+                x = -240
+                y = 69
+                z = -4
+            class AV:
+                x = -237
+                y = 69
+                z = -6
+            class Tr:
+                x = -237
+                y = 69
+                z = -4
 
 mc.events.clearAll()
 
@@ -27,6 +183,22 @@ yellowsUsed = 0
 bluesUsed = 0
 blacksUsed = 0
 whitesUsed = 0
+
+class gameOverText:
+    x = -228
+    y = 68
+    z = 31
+
+class welcomeText:
+    x = -228
+    y = 68
+    z = 29
+
+mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 152) # <-- Welcomes players
+mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 0)   # <-- This line is needed too!
+
+#mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 152) # <-- When game is over
+#mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 0)   # <-- This line too!
 
 blue = 11
 green = 13
@@ -443,6 +615,8 @@ i = 1
 while (i < 10):
     mc.setBlock(blocks6X[i], blocksY, blocks6Z[i], 0)
     i = i + 1
+
+# "Game begin" ---------------------------------------------------------------
     
 while (players < 6):
     print("Waiting for players")
@@ -458,28 +632,12 @@ while (players < 6):
 
 mc.postToChat("Enough players to play the game!")
 print("Enough (6) players")
-    
-gTurn = 1
+
+print("Entering the game loop...")
 gRound = 1
-
-while (gRound < 3):
-    print("Round: ", gRound)
-    gTurn = 1
-
-
-    
-    while (gTurn < 7):
-        print("Turn: ", gTurn)
-        tochat = ("It's your turn, player", gTurn)
-        mc.postToChat(tochat)
-        gTurn = gTurn + 1
-
-        
-        
-    gRound = gRound + 1
-
-print("Loop!")
-while (True):
+gTurn = 1
+someoneWon = False
+while (someoneWon == False):
     checkBlocks1()
     blockEvents = mc.events.pollBlockHits()
     if (blockEvents):
