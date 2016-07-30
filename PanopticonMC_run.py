@@ -194,12 +194,6 @@ class welcomeText:
     y = 68
     z = 29
 
-mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 152) # <-- Welcomes players
-mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 0)   # <-- This line is needed too!
-
-#mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 152) # <-- When game is over
-#mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 0)   # <-- This line too!
-
 blue = 11
 green = 13
 red = 14
@@ -229,8 +223,8 @@ blocks6X = [-237, -233, -237, -228, -232, -238, -223, -228, -234, -239]
 blocks6Z = [-1, 4, 7, 6, 10, 13, 10, 15, 18, 19]
 
 throwDiceY = 73
-throwDiceX = [-236]
-throwDiceZ = [-11]
+throwDiceX = [-236, -240, -248, -252, -248, -240]
+throwDiceZ = [-12, -18, -18, -12, -6, -5]
 
 blocks1 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks2 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -238,33 +232,46 @@ blocks3 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks4 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks5 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks6 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    
-def checkBlocks1():
-    blocks1OnPlace1 = mc.getBlock(-235, 72, -12)
-    blocks1OnPlace2 = mc.getBlock(-235, 73, -12)
-    blocks1OnPlace3 = mc.getBlock(-235, 74, -12)
-    if blocks1OnPlace1 == 0:
-        visibleLayers1 = 1
-        mc.setBlock(blocks1X[0], blocksY, blocks1Z[0], 35, blocks1[0])
-    elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 0:
-        visibleLayers1 = 2
-        i = 0
-        while (i < 3):
-            mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
-            i = i + 1
-    elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 0:
-        visibleLayers1 = 3
-        i = 0
-        while (i < 6):
-            mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
-            i = i + 1
-    elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 35:
-        visibleLayers1 = 4
-        i = 0
-        while (i < 10):
-            mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
-            i = i + 1
 
+visibleLayers = [1, 1, 1, 1, 1, 1]
+    
+def checkBlocks(player):
+    if player == 1:
+        blocks1OnPlace1 = mc.getBlock(-235, 72, -12)
+        blocks1OnPlace2 = mc.getBlock(-235, 73, -12)
+        blocks1OnPlace3 = mc.getBlock(-235, 74, -12)
+        if blocks1OnPlace1 == 0:
+            visibleLayers[0] = 1
+            mc.setBlock(blocks1X[0], blocksY, blocks1Z[0], 35, blocks1[0])
+        elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 0:
+            visibleLayers[1] = 2
+            i = 0
+            while (i < 3):
+                mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
+                i = i + 1
+        elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 0:
+            visibleLayers[1] = 3
+            i = 0
+            while (i < 6):
+                mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
+                i = i + 1
+        elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 35:
+            visibleLayers[1] = 4
+            i = 0
+            while (i < 10):
+                mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
+                i = i + 1
+    elif player == 2:
+        print("Not possible yet")
+    elif player == 3:
+        print("Not possible yet")
+    elif player == 4:
+        print("Not possible yet")
+    elif player == 5:
+        print("Not possible yet")
+    elif player == 6:
+        print("Not possible yet")
+        
 def getPlayerNum():
     playerIds = mc.getPlayerEntityIds()
     P1 = playerIds[0]
@@ -321,8 +328,59 @@ def dice():
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, blue)
     else:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, yellow)
-    sleep(0.4)
-    
+    return dColor
+
+def checkClicks(plr):
+    blockEvents = mc.events.pollBlockHits()
+    if (blockEvents):
+        if (plr == 1):
+            if blockEvents[0].pos.x == throwDiceX[0] and blockEvents[0].pos.y == throwDiceY and blockEvents[0].pos.z == throwDiceZ[0]:
+                return 1
+            elif blockEvents[0].pos.x == -236 and blockEvents[0].pos.y == 72 and blockEvents[0].pos.z == -12:
+                return 0
+            else:
+                return -1
+            mc.events.clearAll()
+        elif (plr == 2):
+            if blockEvents[0].pos.x == throwDiceX[1] and blockEvents[0].pos.y == throwDiceY and blockEvents[0].pos.z == throwDiceZ[1]:
+                return 1
+            elif blockEvents[0].pos.x == -240 and blockEvents[0].pos.y == 72 and blockEvents[0].pos.z == -18:
+                return 0
+            else:
+                return -1
+            mc.events.clearAll()
+        elif (plr == 3):
+            if blockEvents[0].pos.x == throwDiceX[2] and blockEvents[0].pos.y == throwDiceY and blockEvents[0].pos.z == throwDiceZ[2]:
+                return 1
+            elif blockEvents[0].pos.x == -248 and blockEvents[0].pos.y == 72 and blockEvents[0].pos.z == -18:
+                return 0
+            else:
+                return -1
+            mc.events.clearAll()
+        elif (plr == 4):
+            if blockEvents[0].pos.x == throwDiceX[3] and blockEvents[0].pos.y == throwDiceY and blockEvents[0].pos.z == throwDiceZ[3]:
+                return 1
+            elif blockEvents[0].pos.x == -252 and blockEvents[0].pos.y == 72 and blockEvents[0].pos.z == -12:
+                return 0
+            else:
+                return -1
+            mc.events.clearAll()
+        elif (plr == 5):
+            if blockEvents[0].pos.x == throwDiceX[4] and blockEvents[0].pos.y == throwDiceY and blockEvents[0].pos.z == throwDiceZ[4]:
+                return 1
+            elif blockEvents[0].pos.x == -248 and blockEvents[0].pos.y == 72 and blockEvents[0].pos.z == -6:
+                return 0
+            else:
+                return -1
+            mc.events.clearAll()
+        elif (plr == 6):
+            if blockEvents[0].pos.x == throwDiceX[5] and blockEvents[0].pos.y == throwDiceY and blockEvents[0].pos.z == throwDiceZ[5]:
+                return 1
+            elif blockEvents[0].pos.x == -240 and blockEvents[0].pos.y == 72 and blockEvents[0].pos.z == -6:
+                return 0
+            else:
+                return -1
+            mc.events.clearAll()
 
 players = 1#getPlayerNum() #That doesn't work
 
@@ -616,7 +674,7 @@ while (i < 10):
     mc.setBlock(blocks6X[i], blocksY, blocks6Z[i], 0)
     i = i + 1
 
-# "Game begin" ---------------------------------------------------------------
+# "Game begin" -----------------------------------------------------------------------------------------------------
     
 while (players < 6):
     print("Waiting for players")
@@ -633,19 +691,37 @@ while (players < 6):
 mc.postToChat("Enough players to play the game!")
 print("Enough (6) players")
 
+mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 152) # <-- Welcomes players
+mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 0)   # <-- This line is needed too!
+
 print("Entering the game loop...")
 gRound = 1
 gTurn = 1
+turnDone = False
 someoneWon = False
 while (someoneWon == False):
-    checkBlocks1()
-    blockEvents = mc.events.pollBlockHits()
-    if (blockEvents):
-        for blockEvent in blockEvents:
-            mc.postToChat("Something was hit!")
-            if blockEvents[0].pos.x == throwDiceX[0] and blockEvents[0].pos.y == throwDiceY and blockEvents[0].pos.z == throwDiceZ[0]:
-                dice()
-        mc.events.clearAll()
-    sleep(0.2)
-    
-    
+    for gRound in range(1, 11):
+        textToChat = "Round:", gRound
+        mc.postToChat(textToChat)
+        print(textToChat)
+        for gTurn in range(1, 7):
+            turnDone = False
+            while (turnDone == False):
+                textToChat = "Turn:", gTurn
+                mc.postToChat(textToChat)
+                print(textToChat)
+                checkBlocks(gTurn)
+                plrWantsToDo = checkClicks(gTurn)
+                if plrWantsToDo == 1 or plrWantsToDo == 0:
+                    if plrWantsToDo == 1:
+                        diceColor = dice()
+                        if diceColor == blocks:
+                            
+                    elif plrWantsToDo == 0
+                        turnDone = True
+                sleep(0.2)
+    someoneWon = True
+
+print("Game Over")
+mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 152) # <-- When game is over
+mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 0)   # <-- This line too!
