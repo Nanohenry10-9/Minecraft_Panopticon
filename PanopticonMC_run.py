@@ -187,7 +187,7 @@ whitesUsed = 0
 class gameOverText:
     x = -228
     y = 68
-    z = 31
+    z = 33
 
 class welcomeText:
     x = -228
@@ -201,6 +201,8 @@ white = 0
 black = 15
 yellow = 4
 grey = 7
+
+colours = [11, 13, 14, 0, 15, 4, 7]
 
 blocksY = 71
 
@@ -712,13 +714,36 @@ while (someoneWon == False):
                 print(textToChat)
                 checkBlocks(gTurn)
                 plrWantsToDo = checkClicks(gTurn)
-                if plrWantsToDo == 1 or plrWantsToDo == 0:
-                    if plrWantsToDo == 1:
-                        diceColor = dice()
-                        if diceColor == blocks:
-                            
-                    elif plrWantsToDo == 0
-                        turnDone = True
+                if plrWantsToDo == 1:
+                    diceColor = dice()
+                    if gTurn == 1:
+                        if diceColor in blocks1:
+                            setBlock(-253, 71 + visibleLayers[gTurn], -12, 35, colours[diceColor])
+                            print("New block for player", gTurn)
+                    elif gTurn == 2:
+                        if diceColor in blocks2:
+                            setBlock(-249, 71 + visibleLayers[gTurn], -5, 35, colours[diceColor])
+                            print("New block for player", gTurn)
+                    elif gTurn == 3:
+                        if diceColor in blocks3:
+                            setBlock(-249, 71 + visibleLayers[gTurn], -19, 35, colours[diceColor])
+                            print("New block for player", gTurn)
+                    elif gTurn == 4:
+                        if diceColor in blocks4:
+                            setBlock(-253, 71 + visibleLayers[gTurn], -12, 35, colours[diceColor])
+                            print("New block for player", gTurn)
+                    elif gTurn == 5:
+                        if diceColor in blocks5:
+                            setBlock(-249, 71 + visibleLayers[gTurn], -5, 35, colours[diceColor])
+                            print("New block for player", gTurn)
+                    elif gTurn == 6:
+                        if diceColor in blocks6:
+                            setBlock(-239, 71 + visibleLayers[gTurn], -5, 35, colours[diceColor])
+                            print("New block for player", gTurn)
+                    turnDone = True
+                                
+                elif plrWantsToDo == 0:
+                    turnDone = True
                 sleep(0.2)
     someoneWon = True
 
