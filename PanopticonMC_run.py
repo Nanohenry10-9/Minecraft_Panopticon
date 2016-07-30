@@ -202,8 +202,6 @@ black = 15
 yellow = 4
 grey = 7
 
-colours = [11, 13, 14, 0, 15, 4, 7]
-
 blocksY = 71
 
 blocks1X = [-230, -224, -224, -219, -217, -219, -214, -212, -212, -214]
@@ -243,22 +241,18 @@ def checkBlocks(player):
         blocks1OnPlace2 = mc.getBlock(-235, 73, -12)
         blocks1OnPlace3 = mc.getBlock(-235, 74, -12)
         if blocks1OnPlace1 == 0:
-            visibleLayers[0] = 1
             mc.setBlock(blocks1X[0], blocksY, blocks1Z[0], 35, blocks1[0])
         elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 0:
-            visibleLayers[1] = 2
             i = 0
             while (i < 3):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
                 i = i + 1
         elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 0:
-            visibleLayers[1] = 3
             i = 0
             while (i < 6):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
                 i = i + 1
         elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 35:
-            visibleLayers[1] = 4
             i = 0
             while (i < 10):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
@@ -317,20 +311,25 @@ def dice():
     sleep(0.4)
     mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, white)
     sleep(0.4)
-    mc.postToChat("Alea iacta est!")
+    mc.postToChat("Alea iacta est! (The dice is thrown!)")
     if dColor == 1:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, white)
+        return white
     elif dColor == 2:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, red)
+        return red
     elif dColor == 3:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, green)
+        return green
     elif dColor == 4:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, black)
+        return black
     elif dColor == 5:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, blue)
+        return blue
     else:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, yellow)
-    return dColor
+        return yellow
 
 def checkClicks(plr):
     blockEvents = mc.events.pollBlockHits()
@@ -718,28 +717,34 @@ while (someoneWon == False):
                     diceColor = dice()
                     if gTurn == 1:
                         if diceColor in blocks1:
-                            setBlock(-253, 71 + visibleLayers[gTurn], -12, 35, colours[diceColor])
+                            mc.setBlock(-235, 71 + visibleLayers[gTurn], -12, 35, diceColor)
                             print("New block for player", gTurn)
+                            visibleLayers[gTurn] += 1
                     elif gTurn == 2:
                         if diceColor in blocks2:
-                            setBlock(-249, 71 + visibleLayers[gTurn], -5, 35, colours[diceColor])
+                            mc.setBlock(-239, 71 + visibleLayers[gTurn], -19, 35, diceColor)
                             print("New block for player", gTurn)
+                            visibleLayers[gTurn] += 1
                     elif gTurn == 3:
                         if diceColor in blocks3:
-                            setBlock(-249, 71 + visibleLayers[gTurn], -19, 35, colours[diceColor])
+                            mc.setBlock(-249, 71 + visibleLayers[gTurn], -19, 35, diceColor)
                             print("New block for player", gTurn)
+                            visibleLayers[gTurn] += 1
                     elif gTurn == 4:
                         if diceColor in blocks4:
-                            setBlock(-253, 71 + visibleLayers[gTurn], -12, 35, colours[diceColor])
+                            mc.setBlock(-253, 71 + visibleLayers[gTurn], -12, 35, diceColor)
                             print("New block for player", gTurn)
+                            visibleLayers[gTurn] += 1
                     elif gTurn == 5:
                         if diceColor in blocks5:
-                            setBlock(-249, 71 + visibleLayers[gTurn], -5, 35, colours[diceColor])
+                            mc.setBlock(-249, 71 + visibleLayers[gTurn], -5, 35, diceColor)
                             print("New block for player", gTurn)
+                            visibleLayers[gTurn] += 1
                     elif gTurn == 6:
                         if diceColor in blocks6:
-                            setBlock(-239, 71 + visibleLayers[gTurn], -5, 35, colours[diceColor])
+                            mc.setBlock(-239, 71 + visibleLayers[gTurn], -5, 35, diceColor)
                             print("New block for player", gTurn)
+                            visibleLayers[gTurn] += 1
                     turnDone = True
                                 
                 elif plrWantsToDo == 0:
