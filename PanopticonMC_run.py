@@ -3,7 +3,7 @@ mc = Minecraft.create()
 from time import sleep
 from random import randint
 
-mc.setting("world_immutable", False)
+mc.setting("world_immutable", True)
 
 class player:
     class plr1:
@@ -269,32 +269,11 @@ def checkBlocks(player):
         print("Not possible yet")
         
 def getPlayerNum():
-    playerIds = mc.getPlayerEntityIds()
-    P1 = playerIds[0]
-    if P1 == 0:
+    try:
+        playerIds = mc.getPlayerEntityIds()
+        return len(playerIds)
+    except:
         return 0
-    else:
-        P2 = playerIds[1]
-        if P2 == 0:
-            return 1
-        else:
-            P3 = playerIds[2]
-            if P3 == 0:
-                return 2
-            else:
-                P4 = playerIds[3]
-                if P4 == 0:
-                    return 3
-                else:
-                    P5 = playerIds[4]
-                    if P5 == 0:
-                        return 4
-                    else:
-                        P6 = playerIds[5]
-                        if P6 == 0:
-                            return 5
-                        else:
-                            return 6
 
 def dice():
     mc.postToChat("Throwing the dice...")
@@ -383,7 +362,7 @@ def checkClicks(plr):
                 return -1
             mc.events.clearAll()
 
-players = 1#getPlayerNum() #That doesn't work
+players = getPlayerNum()
 
 i = 0
 while (i < 10):
@@ -683,7 +662,7 @@ while (players < 6):
     mc.postToChat("Current players amount:")
     mc.postToChat(players)
     sleep(5)
-    players = 6#getPlayerNum()
+    players = getPlayerNum()
     print("Players online: ", players)
     mc.postToChat("Waiting for players to connect")
     mc.postToChat("Current players amount:")
