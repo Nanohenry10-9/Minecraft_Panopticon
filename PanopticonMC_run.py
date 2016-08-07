@@ -282,6 +282,8 @@ blocks4 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks5 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks6 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
+all_blocks = [blocks1, blocks2, blocks3, blocks4, blocks5, blocks6]
+
 visibleLayers = [1, 1, 1, 1, 1, 1]
 
 
@@ -417,263 +419,59 @@ def checkClicks(plr):
 
 players = getPlayerNum()
 
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while not doneRandoming:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks1[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks1[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks1[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks1[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks1[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks1[i] = green
-    i = i + 1
 
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while not doneRandoming:
-        blockColor = randint(1, 6)
+def prepare_block(blocks):
+    global blacksUsed
+    global bluesUsed
+    global yellowsUsed
+    global redsUsed
+    global whitesUsed
+    global greensUsed
+    i = 0
+    while (i < 10):
+        doneRandoming = False
+        while not doneRandoming:
+            blockColor = randint(1, 6)
+            if blockColor == 1:
+                if blacksUsed <= 10:
+                    doneRandoming = True
+            if blockColor == 2:
+                if bluesUsed <= 10:
+                    doneRandoming = True
+            if blockColor == 3:
+                if yellowsUsed <= 10:
+                    doneRandoming = True
+            if blockColor == 4:
+                if redsUsed <= 10:
+                    doneRandoming = True
+            if blockColor == 5:
+                if whitesUsed <= 10:
+                    doneRandoming = True
+            if blockColor == 6:
+                if greensUsed <= 10:
+                    doneRandoming = True
         if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks2[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks2[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks2[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks2[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks2[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks2[i] = green
-    i = i + 1
+            blacksUsed += 1
+            blocks[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
+        elif blockColor == 2:
+            bluesUsed += 1
+            blocks[i] = blue
+        elif blockColor == 3:
+            yellowsUsed += 1
+            blocks[i] = yellow
+        elif blockColor == 4:
+            redsUsed += 1
+            blocks[i] = red
+        elif blockColor == 5:
+            whitesUsed += 1
+            blocks[i] = white
+        elif blockColor == 6:
+            greensUsed += 1
+            blocks[i] = green
+        i = i + 1
 
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while not doneRandoming:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks3[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks3[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks3[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks3[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks3[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks3[i] = green
-    i = i + 1
-
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while not doneRandoming:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks4[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks4[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks4[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks4[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks4[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks4[i] = green
-    i = i + 1
-
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while not doneRandoming:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks5[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks5[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks5[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks5[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks5[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks5[i] = green
-    i = i + 1
-
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while not doneRandoming:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks6[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks6[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks6[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks6[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks6[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks6[i] = green
-    i = i + 1
+for blocks in all_blocks:
+    prepare_block(blocks)
 
 mc.setBlock(blocks1X[0], blocksY, blocks1Z[0], 35, blocks1[0])
 mc.setBlock(blocks2X[0], blocksY, blocks2Z[0], 35, blocks2[0])
