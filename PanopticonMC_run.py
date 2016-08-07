@@ -236,14 +236,6 @@ class welcomeText:
     y = 68
     z = 29
 
-blue = 11
-green = 13
-red = 14
-white = 0
-black = 15
-yellow = 4
-grey = 7
-
 blocksY = 71  # Altitude of the board
 
 blocks1X = [-230, -224, -224, -219, -217, -219, -214, -212, -212, -214]
@@ -316,31 +308,32 @@ def getPlayerNum():
         return 0
 
 
+class Color(object):
+
+    def __init__(mc_value, dice_id):
+        self.mc_value = mc_value
+        self.dice_id = dice_id
+        self.used = 0
+
+black = Color(15, 0)
+grey = Color(7, 1)  # use "grey" for black on the board: it's seen much easier on the black game board
+blue = Color(11, 2)
+yellow = Color(4, 3)
+red = Color(14, 4)
+white = Color(0, 5)
+green = Color(13, 6)
+all_colors = [black, grey, blue, yellow, red, white, green]  # The position in the list correspond to the dice ID
+
+
 def dice():
     mc.postToChat("Throwing the dice...")
-    dColor = randint(1, 6)
-    for color in [black, green, red, yellow, blue, white]:
+    for color in [black.mc_value, green.mc_value, red.mc_value, yellow.mc_value, blue.mc_value, white.mc_value]:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, color)
         sleep(0.4)
     mc.postToChat("Alea iacta est! (The dice is thrown!)")
-    if dColor == 1:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, white)
-        return white
-    elif dColor == 2:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, red)
-        return red
-    elif dColor == 3:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, green)
-        return green
-    elif dColor == 4:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, black)
-        return black
-    elif dColor == 5:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, blue)
-        return blue
-    else:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, yellow)
-        return yellow
+    color = all_colors[randint(1, 6)]
+    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, color.mc_value)
+    return color
 
 
 def checkClicks(plr):
@@ -396,64 +389,19 @@ def checkClicks(plr):
             mc.events.clearAll()
 
 
-redsUsed = 0
-greensUsed = 0
-yellowsUsed = 0
-bluesUsed = 0
-blacksUsed = 0
-whitesUsed = 0
-
-
-def prepare_block(blocks):
-    global blacksUsed
-    global bluesUsed
-    global yellowsUsed
-    global redsUsed
-    global whitesUsed
-    global greensUsed
+def prepare_blocks(blocks):
     for i in range(0, 10):
         doneRandoming = False
         while not doneRandoming:
-            blockColor = randint(1, 6)
-            if blockColor == 1:
-                if blacksUsed <= 10:
-                    doneRandoming = True
-            if blockColor == 2:
-                if bluesUsed <= 10:
-                    doneRandoming = True
-            if blockColor == 3:
-                if yellowsUsed <= 10:
-                    doneRandoming = True
-            if blockColor == 4:
-                if redsUsed <= 10:
-                    doneRandoming = True
-            if blockColor == 5:
-                if whitesUsed <= 10:
-                    doneRandoming = True
-            if blockColor == 6:
-                if greensUsed <= 10:
-                    doneRandoming = True
-        if blockColor == 1:
-            blacksUsed += 1
-            blocks[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
-        elif blockColor == 2:
-            bluesUsed += 1
-            blocks[i] = blue
-        elif blockColor == 3:
-            yellowsUsed += 1
-            blocks[i] = yellow
-        elif blockColor == 4:
-            redsUsed += 1
-            blocks[i] = red
-        elif blockColor == 5:
-            whitesUsed += 1
-            blocks[i] = white
-        elif blockColor == 6:
-            greensUsed += 1
-            blocks[i] = green
+            color = all_colors[randint(1, 6)]
+            if color.used >= 10:
+                continue
+            doneRandoming = True
+        color.used += 1
+        blocks[i] = color.mc_value
 
 for blocks in all_blocks:
-    prepare_block(blocks)
+    prepare_blocks(blocks)
 
 mc.setBlock(blocks1X[0], blocksY, blocks1Z[0], 35, blocks1[0])
 mc.setBlock(blocks2X[0], blocksY, blocks2Z[0], 35, blocks2[0])
@@ -507,7 +455,7 @@ while not someoneWon:
                 checkBlocks(gTurn)
                 plrWantsToDo = checkClicks(gTurn)
                 if plrWantsToDo == 1:
-                    diceColor = dice()
+                    diceColor.mc_value = dice()
                     if gTurn == 1:
                         if diceColor in blocks1:
                             mc.setBlock(-235, 71 + visibleLayers[gTurn], -12, 35, diceColor)
