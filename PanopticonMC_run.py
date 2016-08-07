@@ -480,30 +480,13 @@ mc.setBlock(blocks4X[0], blocksY, blocks4Z[0], 35, blocks4[0])
 mc.setBlock(blocks5X[0], blocksY, blocks5Z[0], 35, blocks5[0])
 mc.setBlock(blocks6X[0], blocksY, blocks6Z[0], 35, blocks6[0])
 
-i = 1
-while (i < 10):
+for i in range(1, 10):
     mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 0)
-    i = i + 1
-i = 1
-while (i < 10):
     mc.setBlock(blocks2X[i], blocksY, blocks2Z[i], 0)
-    i = i + 1
-i = 1
-while (i < 10):
     mc.setBlock(blocks3X[i], blocksY, blocks3Z[i], 0)
-    i = i + 1
-i = 1
-while (i < 10):
     mc.setBlock(blocks4X[i], blocksY, blocks4Z[i], 0)
-    i = i + 1
-i = 1
-while (i < 10):
     mc.setBlock(blocks5X[i], blocksY, blocks5Z[i], 0)
-    i = i + 1
-i = 1
-while (i < 10):
     mc.setBlock(blocks6X[i], blocksY, blocks6Z[i], 0)
-    i = i + 1
 
 # "Game begin" -----------------------------------------------------------------------------------------------------
 
