@@ -325,18 +325,9 @@ def getPlayerNum():
 def dice():
     mc.postToChat("Throwing the dice...")
     dColor = randint(1, 6)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, black)
-    sleep(0.4)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, green)
-    sleep(0.4)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, red)
-    sleep(0.4)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, yellow)
-    sleep(0.4)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, blue)
-    sleep(0.4)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, white)
-    sleep(0.4)
+    for color in [black, green, red, yellow, blue, white]:
+        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, color)
+        sleep(0.4)
     mc.postToChat("Alea iacta est! (The dice is thrown!)")
     if dColor == 1:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, white)
