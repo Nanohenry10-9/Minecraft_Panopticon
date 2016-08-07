@@ -224,13 +224,6 @@ class player:
 
 mc.events.clearAll()
 
-redsUsed = 0
-greensUsed = 0
-yellowsUsed = 0
-bluesUsed = 0
-blacksUsed = 0
-whitesUsed = 0
-
 
 class gameOverText:
     x = -228
@@ -417,7 +410,13 @@ def checkClicks(plr):
                 return -1
             mc.events.clearAll()
 
-players = getPlayerNum()
+
+redsUsed = 0
+greensUsed = 0
+yellowsUsed = 0
+bluesUsed = 0
+blacksUsed = 0
+whitesUsed = 0
 
 
 def prepare_block(blocks):
@@ -490,17 +489,15 @@ for i in range(1, 10):
 
 # "Game begin" -----------------------------------------------------------------------------------------------------
 
+players = getPlayerNum()
 while (players < 6):
     print("Waiting for players")
     mc.postToChat("Waiting for players to connect")
+    print("Players online: ", players)
     mc.postToChat("Current players amount:")
     mc.postToChat(players)
     sleep(5)
     players = getPlayerNum()
-    print("Players online: ", players)
-    mc.postToChat("Waiting for players to connect")
-    mc.postToChat("Current players amount:")
-    mc.postToChat(players)
 
 mc.postToChat("Enough players to play the game!")
 print("Enough (6) players")
