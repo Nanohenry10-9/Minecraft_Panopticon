@@ -1,175 +1,222 @@
 from mcpi.minecraft import Minecraft
-mc = Minecraft.create()
 from time import sleep
 from random import randint
 
+mc = Minecraft.create()
 mc.setting("world_immutable", True)
+
 
 class player:
     class plr1:
         role = 1
         numOfBlocks = 0
+
         class roleInfo:
             class BH:
                 x = -234
                 y = 69
                 z = -10
+
             class GH:
                 x = -235
                 y = 69
                 z = -11
+
             class Ac:
                 x = -237
                 y = 69
                 z = -11
+
             class NGO:
                 x = -237
                 y = 69
                 z = -9
+
             class AV:
                 x = -236
                 y = 69
                 z = -10
+
             class Tr:
                 x = -235
                 y = 69
                 z = -9
+
     class plr2:
         role = 2
         numOfBlocks = 0
+
         class roleInfo:
+
             class BH:
                 x = -239
                 y = 69
                 z = -20
+
             class GH:
                 x = -240
                 y = 69
                 z = -19
+
             class Ac:
                 x = -241
                 y = 69
                 z = -20
+
             class NGO:
                 x = -239
                 y = 69
                 z = 18
+
             class AV:
                 x = -238
                 y = 69
                 z = -19
+
             class Tr:
                 x = -240
                 y = 69
                 z = -21
+
     class plr3:
         role = 3
         numOfBlocks = 0
+
         class roleInfo:
+
             class BH:
                 x = -248
                 y = 69
                 z = -19
+
             class GH:
                 x = -249
                 y = 69
                 z = -20
+
             class Ac:
                 x = -247
                 y = 69
                 z = -20
+
             class NGO:
                 x = -248
                 y = 69
                 z = -21
+
             class AV:
                 x = -250
                 y = 69
                 z = -19
+
             class Tr:
                 x = -249
                 y = 69
                 z = -18
+
     class plr4:
         role = 4
         numOfBlocks = 0
+
         class roleInfo:
+
             class BH:
                 x = -252
                 y = 69
                 z = -11
+
             class GH:
                 x = -253
                 y = 69
                 z = -10
+
             class Ac:
                 x = -254
                 y = 69
                 z = -11
+
             class NGO:
                 x = -253
                 y = 69
                 z = -12
+
             class AV:
                 x = -252
                 y = 69
                 z = -13
+
             class Tr:
                 x = -254
                 y = 69
                 z = -13
+
     class plr5:
         role = 5
         numOfBlocks = 0
+
         class roleInfo:
+
             class BH:
                 x = -248
                 y = 69
                 z = -5
+
             class GH:
                 x = -249
                 y = 69
                 z = -4
+
             class Ac:
                 x = -249
                 y = 69
                 z = -6
+
             class NGO:
                 x = -250
                 y = 69
                 z = -5
+
             class AV:
                 x = -250
                 y = 69
                 z = -7
+
             class Tr:
                 x = -251
                 y = 69
                 z = -6
+
     class plr6:
         role = 6
         numOfBlocks = 0
+
         class roleInfo:
+
             class BH:
                 x = 239
                 y = 69
                 z = -5
+
             class GH:
                 x = -240
                 y = 69
                 z = -7
+
             class Ac:
                 x = -239
                 y = 67
                 z = -5
+
             class NGO:
                 x = -240
                 y = 69
                 z = -4
+
             class AV:
                 x = -237
                 y = 69
                 z = -6
+
             class Tr:
                 x = -237
                 y = 69
@@ -184,10 +231,12 @@ bluesUsed = 0
 blacksUsed = 0
 whitesUsed = 0
 
+
 class gameOverText:
     x = -228
     y = 68
     z = 33
+
 
 class welcomeText:
     x = -228
@@ -234,7 +283,8 @@ blocks5 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks6 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 visibleLayers = [1, 1, 1, 1, 1, 1]
-    
+
+
 def checkBlocks(player):
     if player == 1:
         blocks1OnPlace1 = mc.getBlock(-235, 72, -12)
@@ -267,13 +317,15 @@ def checkBlocks(player):
         print("Not possible yet")
     elif player == 6:
         print("Not possible yet")
-        
+
+
 def getPlayerNum():
     try:
         playerIds = mc.getPlayerEntityIds()
         return len(playerIds)
     except:
         return 0
+
 
 def dice():
     mc.postToChat("Throwing the dice...")
@@ -309,6 +361,7 @@ def dice():
     else:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, yellow)
         return yellow
+
 
 def checkClicks(plr):
     blockEvents = mc.events.pollBlockHits()
@@ -367,7 +420,7 @@ players = getPlayerNum()
 i = 0
 while (i < 10):
     doneRandoming = False
-    while doneRandoming == False:
+    while not doneRandoming:
         blockColor = randint(1, 6)
         if blockColor == 1:
             if blacksUsed <= 10:
@@ -389,7 +442,7 @@ while (i < 10):
                 doneRandoming = True
     if blockColor == 1:
         blacksUsed = (blacksUsed + 1)
-        blocks1[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
+        blocks1[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
     elif blockColor == 2:
         bluesUsed = (bluesUsed + 1)
         blocks1[i] = blue
@@ -410,7 +463,7 @@ while (i < 10):
 i = 0
 while (i < 10):
     doneRandoming = False
-    while doneRandoming == False:
+    while not doneRandoming:
         blockColor = randint(1, 6)
         if blockColor == 1:
             if blacksUsed <= 10:
@@ -432,7 +485,7 @@ while (i < 10):
                 doneRandoming = True
     if blockColor == 1:
         blacksUsed = (blacksUsed + 1)
-        blocks2[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
+        blocks2[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
     elif blockColor == 2:
         bluesUsed = (bluesUsed + 1)
         blocks2[i] = blue
@@ -453,7 +506,7 @@ while (i < 10):
 i = 0
 while (i < 10):
     doneRandoming = False
-    while doneRandoming == False:
+    while not doneRandoming:
         blockColor = randint(1, 6)
         if blockColor == 1:
             if blacksUsed <= 10:
@@ -475,7 +528,7 @@ while (i < 10):
                 doneRandoming = True
     if blockColor == 1:
         blacksUsed = (blacksUsed + 1)
-        blocks3[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
+        blocks3[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
     elif blockColor == 2:
         bluesUsed = (bluesUsed + 1)
         blocks3[i] = blue
@@ -496,7 +549,7 @@ while (i < 10):
 i = 0
 while (i < 10):
     doneRandoming = False
-    while doneRandoming == False:
+    while not doneRandoming:
         blockColor = randint(1, 6)
         if blockColor == 1:
             if blacksUsed <= 10:
@@ -518,7 +571,7 @@ while (i < 10):
                 doneRandoming = True
     if blockColor == 1:
         blacksUsed = (blacksUsed + 1)
-        blocks4[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
+        blocks4[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
     elif blockColor == 2:
         bluesUsed = (bluesUsed + 1)
         blocks4[i] = blue
@@ -539,7 +592,7 @@ while (i < 10):
 i = 0
 while (i < 10):
     doneRandoming = False
-    while doneRandoming == False:
+    while not doneRandoming:
         blockColor = randint(1, 6)
         if blockColor == 1:
             if blacksUsed <= 10:
@@ -561,7 +614,7 @@ while (i < 10):
                 doneRandoming = True
     if blockColor == 1:
         blacksUsed = (blacksUsed + 1)
-        blocks5[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
+        blocks5[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
     elif blockColor == 2:
         bluesUsed = (bluesUsed + 1)
         blocks5[i] = blue
@@ -582,7 +635,7 @@ while (i < 10):
 i = 0
 while (i < 10):
     doneRandoming = False
-    while doneRandoming == False:
+    while not doneRandoming:
         blockColor = randint(1, 6)
         if blockColor == 1:
             if blacksUsed <= 10:
@@ -604,7 +657,7 @@ while (i < 10):
                 doneRandoming = True
     if blockColor == 1:
         blacksUsed = (blacksUsed + 1)
-        blocks6[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
+        blocks6[i] = grey  # "grey" is black, but why it's gray is that it's seen much easier on the black game board
     elif blockColor == 2:
         bluesUsed = (bluesUsed + 1)
         blocks6[i] = blue
@@ -655,7 +708,7 @@ while (i < 10):
     i = i + 1
 
 # "Game begin" -----------------------------------------------------------------------------------------------------
-    
+
 while (players < 6):
     print("Waiting for players")
     mc.postToChat("Waiting for players to connect")
@@ -671,22 +724,22 @@ while (players < 6):
 mc.postToChat("Enough players to play the game!")
 print("Enough (6) players")
 
-mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 152) # <-- Welcomes players
-mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 0)   # <-- This line is needed too!
+mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 152)  # <-- Welcomes players
+mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 0)    # <-- This line is needed too!
 
 print("Entering the game loop...")
 gRound = 1
 gTurn = 1
 turnDone = False
 someoneWon = False
-while (someoneWon == False):
+while not someoneWon:
     for gRound in range(1, 11):
         textToChat = "Round:", gRound
         mc.postToChat(textToChat)
         print(textToChat)
         for gTurn in range(1, 7):
             turnDone = False
-            while (turnDone == False):
+            while not turnDone:
                 textToChat = "Turn:", gTurn
                 mc.postToChat(textToChat)
                 print(textToChat)
@@ -725,12 +778,12 @@ while (someoneWon == False):
                             print("New block for player", gTurn)
                             visibleLayers[gTurn] += 1
                     turnDone = True
-                                
+
                 elif plrWantsToDo == 0:
                     turnDone = True
                 sleep(0.2)
     someoneWon = True
 
 print("Game Over")
-mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 152) # <-- When game is over
-mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 0)   # <-- This line too!
+mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 152)  # <-- When game is over
+mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 0)    # <-- This line too!
