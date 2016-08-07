@@ -244,7 +244,7 @@ black = 15
 yellow = 4
 grey = 7
 
-blocksY = 71
+blocksY = 71  # Altitude of the board
 
 blocks1X = [-230, -224, -224, -219, -217, -219, -214, -212, -212, -214]
 blocks1Z = [-12, -15, -9, -20, -12, -4, -23, -16, -8, -1]
@@ -288,20 +288,14 @@ def checkBlocks(player):
         if blocks1OnPlace1 == 0:
             mc.setBlock(blocks1X[0], blocksY, blocks1Z[0], 35, blocks1[0])
         elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 0:
-            i = 0
-            while (i < 3):
+            for i in range(0, 3):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
-                i = i + 1
         elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 0:
-            i = 0
-            while (i < 6):
+            for i in range(0, 6):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
-                i = i + 1
         elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 35:
-            i = 0
-            while (i < 10):
+            for i in range(0, 10):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
-                i = i + 1
     elif player == 2:
         print("Not possible yet")
     elif player == 3:
@@ -417,8 +411,7 @@ def prepare_block(blocks):
     global redsUsed
     global whitesUsed
     global greensUsed
-    i = 0
-    while (i < 10):
+    for i in range(0, 10):
         doneRandoming = False
         while not doneRandoming:
             blockColor = randint(1, 6)
@@ -458,7 +451,6 @@ def prepare_block(blocks):
         elif blockColor == 6:
             greensUsed += 1
             blocks[i] = green
-        i = i + 1
 
 for blocks in all_blocks:
     prepare_block(blocks)
