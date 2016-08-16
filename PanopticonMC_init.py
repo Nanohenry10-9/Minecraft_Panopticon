@@ -1,7 +1,6 @@
 from mcpi.minecraft import Minecraft
-mc = Minecraft.create()
-from time import sleep
 
+mc = Minecraft.create()
 X1 = -188
 X2 = -300
 Z1 = 46

@@ -1,175 +1,222 @@
 from mcpi.minecraft import Minecraft
-mc = Minecraft.create()
 from time import sleep
 from random import randint
 
+mc = Minecraft.create()
 mc.setting("world_immutable", True)
+
 
 class player:
     class plr1:
         role = 1
         numOfBlocks = 0
+
         class roleInfo:
             class BH:
                 x = -234
                 y = 69
                 z = -10
+
             class GH:
                 x = -235
                 y = 69
                 z = -11
+
             class Ac:
                 x = -237
                 y = 69
                 z = -11
+
             class NGO:
                 x = -237
                 y = 69
                 z = -9
+
             class AV:
                 x = -236
                 y = 69
                 z = -10
+
             class Tr:
                 x = -235
                 y = 69
                 z = -9
+
     class plr2:
         role = 2
         numOfBlocks = 0
+
         class roleInfo:
+
             class BH:
                 x = -239
                 y = 69
                 z = -20
+
             class GH:
                 x = -240
                 y = 69
                 z = -19
+
             class Ac:
                 x = -241
                 y = 69
                 z = -20
+
             class NGO:
                 x = -239
                 y = 69
                 z = 18
+
             class AV:
                 x = -238
                 y = 69
                 z = -19
+
             class Tr:
                 x = -240
                 y = 69
                 z = -21
+
     class plr3:
         role = 3
         numOfBlocks = 0
+
         class roleInfo:
+
             class BH:
                 x = -248
                 y = 69
                 z = -19
+
             class GH:
                 x = -249
                 y = 69
                 z = -20
+
             class Ac:
                 x = -247
                 y = 69
                 z = -20
+
             class NGO:
                 x = -248
                 y = 69
                 z = -21
+
             class AV:
                 x = -250
                 y = 69
                 z = -19
+
             class Tr:
                 x = -249
                 y = 69
                 z = -18
+
     class plr4:
         role = 4
         numOfBlocks = 0
+
         class roleInfo:
+
             class BH:
                 x = -252
                 y = 69
                 z = -11
+
             class GH:
                 x = -253
                 y = 69
                 z = -10
+
             class Ac:
                 x = -254
                 y = 69
                 z = -11
+
             class NGO:
                 x = -253
                 y = 69
                 z = -12
+
             class AV:
                 x = -252
                 y = 69
                 z = -13
+
             class Tr:
                 x = -254
                 y = 69
                 z = -13
+
     class plr5:
         role = 5
         numOfBlocks = 0
+
         class roleInfo:
+
             class BH:
                 x = -248
                 y = 69
                 z = -5
+
             class GH:
                 x = -249
                 y = 69
                 z = -4
+
             class Ac:
                 x = -249
                 y = 69
                 z = -6
+
             class NGO:
                 x = -250
                 y = 69
                 z = -5
+
             class AV:
                 x = -250
                 y = 69
                 z = -7
+
             class Tr:
                 x = -251
                 y = 69
                 z = -6
+
     class plr6:
         role = 6
         numOfBlocks = 0
+
         class roleInfo:
+
             class BH:
                 x = 239
                 y = 69
                 z = -5
+
             class GH:
                 x = -240
                 y = 69
                 z = -7
+
             class Ac:
                 x = -239
                 y = 67
                 z = -5
+
             class NGO:
                 x = -240
                 y = 69
                 z = -4
+
             class AV:
                 x = -237
                 y = 69
                 z = -6
+
             class Tr:
                 x = -237
                 y = 69
@@ -177,32 +224,19 @@ class player:
 
 mc.events.clearAll()
 
-redsUsed = 0
-greensUsed = 0
-yellowsUsed = 0
-bluesUsed = 0
-blacksUsed = 0
-whitesUsed = 0
 
 class gameOverText:
     x = -228
     y = 68
     z = 33
 
+
 class welcomeText:
     x = -228
     y = 68
     z = 29
 
-blue = 11
-green = 13
-red = 14
-white = 0
-black = 15
-yellow = 4
-grey = 7
-
-blocksY = 71
+blocksY = 71  # Altitude of the board
 
 blocks1X = [-230, -224, -224, -219, -217, -219, -214, -212, -212, -214]
 blocks1Z = [-12, -15, -9, -20, -12, -4, -23, -16, -8, -1]
@@ -233,8 +267,11 @@ blocks4 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks5 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks6 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
+all_blocks = [blocks1, blocks2, blocks3, blocks4, blocks5, blocks6]
+
 visibleLayers = [1, 1, 1, 1, 1, 1]
-    
+
+
 def checkBlocks(player):
     if player == 1:
         blocks1OnPlace1 = mc.getBlock(-235, 72, -12)
@@ -243,20 +280,14 @@ def checkBlocks(player):
         if blocks1OnPlace1 == 0:
             mc.setBlock(blocks1X[0], blocksY, blocks1Z[0], 35, blocks1[0])
         elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 0:
-            i = 0
-            while (i < 3):
+            for i in range(0, 3):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
-                i = i + 1
         elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 0:
-            i = 0
-            while (i < 6):
+            for i in range(0, 6):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
-                i = i + 1
         elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 35 and blocks1OnPlace3 == 35:
-            i = 0
-            while (i < 10):
+            for i in range(0, 10):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
-                i = i + 1
     elif player == 2:
         print("Not possible yet")
     elif player == 3:
@@ -267,7 +298,8 @@ def checkBlocks(player):
         print("Not possible yet")
     elif player == 6:
         print("Not possible yet")
-        
+
+
 def getPlayerNum():
     try:
         playerIds = mc.getPlayerEntityIds()
@@ -275,40 +307,34 @@ def getPlayerNum():
     except:
         return 0
 
+
+class Color(object):
+
+    def __init__(mc_value, dice_id):
+        self.mc_value = mc_value
+        self.dice_id = dice_id
+        self.used = 0
+
+black = Color(15, 0)
+grey = Color(7, 1)  # use "grey" for black on the board: it's seen much easier on the black game board
+blue = Color(11, 2)
+yellow = Color(4, 3)
+red = Color(14, 4)
+white = Color(0, 5)
+green = Color(13, 6)
+all_colors = [black, grey, blue, yellow, red, white, green]  # The position in the list correspond to the dice ID
+
+
 def dice():
     mc.postToChat("Throwing the dice...")
-    dColor = randint(1, 6)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, black)
-    sleep(0.4)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, green)
-    sleep(0.4)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, red)
-    sleep(0.4)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, yellow)
-    sleep(0.4)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, blue)
-    sleep(0.4)
-    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, white)
-    sleep(0.4)
+    for color in [black.mc_value, green.mc_value, red.mc_value, yellow.mc_value, blue.mc_value, white.mc_value]:
+        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, color)
+        sleep(0.4)
     mc.postToChat("Alea iacta est! (The dice is thrown!)")
-    if dColor == 1:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, white)
-        return white
-    elif dColor == 2:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, red)
-        return red
-    elif dColor == 3:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, green)
-        return green
-    elif dColor == 4:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, black)
-        return black
-    elif dColor == 5:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, blue)
-        return blue
-    else:
-        mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, yellow)
-        return yellow
+    color = all_colors[randint(1, 6)]
+    mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, color.mc_value)
+    return color
+
 
 def checkClicks(plr):
     blockEvents = mc.events.pollBlockHits()
@@ -362,265 +388,20 @@ def checkClicks(plr):
                 return -1
             mc.events.clearAll()
 
-players = getPlayerNum()
 
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while doneRandoming == False:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks1[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks1[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks1[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks1[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks1[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks1[i] = green
-    i = i + 1
+def prepare_blocks(blocks):
+    for i in range(0, 10):
+        doneRandoming = False
+        while not doneRandoming:
+            color = all_colors[randint(1, 6)]
+            if color.used >= 10:
+                continue
+            doneRandoming = True
+        color.used += 1
+        blocks[i] = color.mc_value
 
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while doneRandoming == False:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks2[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks2[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks2[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks2[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks2[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks2[i] = green
-    i = i + 1
-
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while doneRandoming == False:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks3[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks3[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks3[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks3[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks3[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks3[i] = green
-    i = i + 1
-
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while doneRandoming == False:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks4[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks4[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks4[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks4[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks4[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks4[i] = green
-    i = i + 1
-
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while doneRandoming == False:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks5[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks5[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks5[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks5[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks5[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks5[i] = green
-    i = i + 1
-
-i = 0
-while (i < 10):
-    doneRandoming = False
-    while doneRandoming == False:
-        blockColor = randint(1, 6)
-        if blockColor == 1:
-            if blacksUsed <= 10:
-                doneRandoming = True
-        if blockColor == 2:
-            if bluesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 3:
-            if yellowsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 4:
-            if redsUsed <= 10:
-                doneRandoming = True
-        if blockColor == 5:
-            if whitesUsed <= 10:
-                doneRandoming = True
-        if blockColor == 6:
-            if greensUsed <= 10:
-                doneRandoming = True
-    if blockColor == 1:
-        blacksUsed = (blacksUsed + 1)
-        blocks6[i] = grey #"grey" is black, but why it's gray is that it's seen much easier on the black game board
-    elif blockColor == 2:
-        bluesUsed = (bluesUsed + 1)
-        blocks6[i] = blue
-    elif blockColor == 3:
-        yellowsUsed = (yellowsUsed + 1)
-        blocks6[i] = yellow
-    elif blockColor == 4:
-        redsUsed = (redsUsed + 1)
-        blocks6[i] = red
-    elif blockColor == 5:
-        whitesUsed = (whitesUsed + 1)
-        blocks6[i] = white
-    elif blockColor == 6:
-        greensUsed = (greensUsed + 1)
-        blocks6[i] = green
-    i = i + 1
+for blocks in all_blocks:
+    prepare_blocks(blocks)
 
 mc.setBlock(blocks1X[0], blocksY, blocks1Z[0], 35, blocks1[0])
 mc.setBlock(blocks2X[0], blocksY, blocks2Z[0], 35, blocks2[0])
@@ -629,71 +410,52 @@ mc.setBlock(blocks4X[0], blocksY, blocks4Z[0], 35, blocks4[0])
 mc.setBlock(blocks5X[0], blocksY, blocks5Z[0], 35, blocks5[0])
 mc.setBlock(blocks6X[0], blocksY, blocks6Z[0], 35, blocks6[0])
 
-i = 1
-while (i < 10):
+for i in range(1, 10):
     mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 0)
-    i = i + 1
-i = 1
-while (i < 10):
     mc.setBlock(blocks2X[i], blocksY, blocks2Z[i], 0)
-    i = i + 1
-i = 1
-while (i < 10):
     mc.setBlock(blocks3X[i], blocksY, blocks3Z[i], 0)
-    i = i + 1
-i = 1
-while (i < 10):
     mc.setBlock(blocks4X[i], blocksY, blocks4Z[i], 0)
-    i = i + 1
-i = 1
-while (i < 10):
     mc.setBlock(blocks5X[i], blocksY, blocks5Z[i], 0)
-    i = i + 1
-i = 1
-while (i < 10):
     mc.setBlock(blocks6X[i], blocksY, blocks6Z[i], 0)
-    i = i + 1
 
 # "Game begin" -----------------------------------------------------------------------------------------------------
-    
+
+players = getPlayerNum()
 while (players < 6):
     print("Waiting for players")
     mc.postToChat("Waiting for players to connect")
+    print("Players online: ", players)
     mc.postToChat("Current players amount:")
     mc.postToChat(players)
     sleep(5)
     players = getPlayerNum()
-    print("Players online: ", players)
-    mc.postToChat("Waiting for players to connect")
-    mc.postToChat("Current players amount:")
-    mc.postToChat(players)
 
 mc.postToChat("Enough players to play the game!")
 print("Enough (6) players")
 
-mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 152) # <-- Welcomes players
-mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 0)   # <-- This line is needed too!
+mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 152)  # <-- Welcomes players
+mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 0)    # <-- This line is needed too!
 
 print("Entering the game loop...")
 gRound = 1
 gTurn = 1
 turnDone = False
 someoneWon = False
-while (someoneWon == False):
+while not someoneWon:
     for gRound in range(1, 11):
         textToChat = "Round:", gRound
         mc.postToChat(textToChat)
         print(textToChat)
         for gTurn in range(1, 7):
             turnDone = False
-            while (turnDone == False):
+            while not turnDone:
                 textToChat = "Turn:", gTurn
                 mc.postToChat(textToChat)
                 print(textToChat)
                 checkBlocks(gTurn)
                 plrWantsToDo = checkClicks(gTurn)
                 if plrWantsToDo == 1:
-                    diceColor = dice()
+                    diceColor.mc_value = dice()
                     if gTurn == 1:
                         if diceColor in blocks1:
                             mc.setBlock(-235, 71 + visibleLayers[gTurn], -12, 35, diceColor)
@@ -725,12 +487,12 @@ while (someoneWon == False):
                             print("New block for player", gTurn)
                             visibleLayers[gTurn] += 1
                     turnDone = True
-                                
+
                 elif plrWantsToDo == 0:
                     turnDone = True
                 sleep(0.2)
     someoneWon = True
 
 print("Game Over")
-mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 152) # <-- When game is over
-mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 0)   # <-- This line too!
+mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 152)  # <-- When game is over
+mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 0)    # <-- This line too!
