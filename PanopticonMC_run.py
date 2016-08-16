@@ -310,7 +310,7 @@ def getPlayerNum():
 
 class Color(object):
 
-    def __init__(mc_value, dice_id):
+    def __init__(self, mc_value, dice_id):
         self.mc_value = mc_value
         self.dice_id = dice_id
         self.used = 0
