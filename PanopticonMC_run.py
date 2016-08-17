@@ -5,6 +5,8 @@ from random import randint
 mc = Minecraft.create()
 mc.setting("world_immutable", True)
 
+playersNeededToPlay = 3
+
 
 class player:
     class plr1:
@@ -421,7 +423,7 @@ for i in range(1, 10):
 # "Game begin" -----------------------------------------------------------------------------------------------------
 
 players = getPlayerNum()
-while (players < 6):
+while (players < playersNeededToPlay):
     print("Waiting for players")
     mc.postToChat("Waiting for players to connect")
     print("Players online: ", players)
