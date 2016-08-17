@@ -5,7 +5,7 @@ from random import randint
 mc = Minecraft.create()
 mc.setting("world_immutable", True)
 
-playersNeededToPlay = 1
+playersNeededToPlay = 3
 
 
 class player:
@@ -325,6 +325,8 @@ red = Color(14, 4)
 white = Color(0, 5)
 green = Color(13, 6)
 all_colors = [black, grey, blue, yellow, red, white, green]  # The position in the list correspond to the dice ID
+
+diceColor = Color(0, 0)
 
 
 def dice():
