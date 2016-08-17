@@ -5,7 +5,7 @@ from random import randint
 mc = Minecraft.create()
 mc.setting("world_immutable", True)
 
-playersNeededToPlay = 3
+playersNeededToPlay = 1
 
 
 class player:
