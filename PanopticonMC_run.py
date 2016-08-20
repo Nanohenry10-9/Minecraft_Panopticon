@@ -3,9 +3,9 @@ from time import sleep
 from random import randint
 
 mc = Minecraft.create()
-mc.setting("world_immutable", True)
+mc.setting("world_immutable", False)
 
-playersNeededToPlay = 3
+playersNeededToPlay = 2
 
 
 class player:
@@ -273,6 +273,10 @@ all_blocks = [blocks1, blocks2, blocks3, blocks4, blocks5, blocks6]
 
 visibleLayers = [1, 1, 1, 1, 1, 1]
 
+playerXPoses = [-235, -239, -249, -253, -249, -239]
+playerYPoses = 72
+playerZPoses = [-12, -19, -19, -12, -5, -5]
+
 
 def checkBlocks(player):
     if player == 1:
@@ -433,6 +437,16 @@ while (players < playersNeededToPlay):
     mc.postToChat(players)
     sleep(5)
     players = getPlayerNum()
+    playerIDs = mc.getPlayerEntityIds()
+    for i in range(0, players):
+        mc.player.setPos(playerIDs[i], -244, 79, -13)
+
+playerIDs = mc.getPlayerEntityIds()
+for i in range(0, playersNeededToPlay):
+    mc.player.setPos(playerIDs[i], playerXPoses[i], playerYPoses[i], playerZPoses[i])
+    
+    
+    
 
 mc.postToChat("Enough players to play the game!")
 print("Enough (6) players")
