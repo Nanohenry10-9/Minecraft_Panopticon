@@ -3,7 +3,7 @@ from time import sleep
 from random import randint
 
 mc = Minecraft.create()
-mc.setting("world_immutable", False)
+mc.setting("world_immutable", True)
 
 playersNeededToPlay = 2
 
@@ -295,7 +295,20 @@ def checkBlocks(player):
             for i in range(0, 10):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
     elif player == 2:
-        print("Not possible yet")
+        blocks2OnPlace1 = mc.getBlock(-239, 72, -19)
+        blocks2OnPlace2 = mc.getBlock(-239, 73, -19)
+        blocks2OnPlace3 = mc.getBlock(-239, 74, -19)
+        if blocks2OnPlace1 == 0:
+            mc.setBlock(blocks2X[0], blocksY, blocks2Z[0], 35, blocks2[0])
+        elif blocks2OnPlace1 == 35 and blocks2OnPlace2 == 0:
+            for i in range(0, 3):
+                mc.setBlock(blocks2X[i], blocksY, blocks2Z[i], 35, blocks2[i])
+        elif blocks2OnPlace1 == 35 and blocks2OnPlace2 == 35 and blocks2OnPlace3 == 0:
+            for i in range(0, 6):
+                mc.setBlock(blocks2X[i], blocksY, blocks2Z[i], 35, blocks2[i])
+        elif blocks2OnPlace1 == 35 and blocks2OnPlace2 == 35 and blocks2OnPlace3 == 35:
+            for i in range(0, 10):
+                mc.setBlock(blocks2X[i], blocksY, blocks2Z[i], 35, blocks2[i])
     elif player == 3:
         print("Not possible yet")
     elif player == 4:
@@ -436,14 +449,16 @@ while (players < playersNeededToPlay):
     mc.postToChat("Current players amount:")
     mc.postToChat(players)
     sleep(5)
-    players = getPlayerNum()
     playerIDs = mc.getPlayerEntityIds()
+    players = getPlayerNum()
     for i in range(0, players):
-        mc.player.setPos(playerIDs[i], -244, 79, -13)
+        mc.player.setPos(playerIDs[i], -244, 80, -13)
+        mc.postToChat("Hello, ")
+        mc.postToChat(playerIDs[i])
 
 playerIDs = mc.getPlayerEntityIds()
 for i in range(0, playersNeededToPlay):
-    mc.player.setPos(playerIDs[i], playerXPoses[i], playerYPoses[i], playerZPoses[i])
+    mc.player.setPos(playerIDs[i], playerXPoses[i], playerYPoses, playerZPoses[i])
     
     
     
@@ -456,6 +471,7 @@ mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 0)    # <-- This line i
 
 print("Entering the game loop...")
 gRound = 1
+oldGTurn = 0
 gTurn = 1
 turnDone = False
 someoneWon = False
@@ -467,41 +483,47 @@ while not someoneWon:
         for gTurn in range(1, 7):
             turnDone = False
             while not turnDone:
-                textToChat = "Turn:", gTurn
-                mc.postToChat(textToChat)
-                print(textToChat)
+                if gTurn != oldGTurn:
+                    textToChat = "Turn:", gTurn
+                    mc.postToChat(textToChat)
+                    print(textToChat)
+                    oldGTurn = gTurn
                 checkBlocks(gTurn)
                 plrWantsToDo = checkClicks(gTurn)
+
+                if gTurn >= 3:           # For testing
+                    plrWantsToDo = 0     # This too
+                    
                 if plrWantsToDo == 1:
                     diceColor.mc_value = dice()
                     if gTurn == 1:
-                        if diceColor in blocks1:
-                            mc.setBlock(-235, 71 + visibleLayers[gTurn], -12, 35, diceColor)
+                        if diceColor.mc_value in blocks1[visibleLayers[gTurn]:]:
+                            mc.setBlock(-235, 71 + visibleLayers[gTurn], -12, 35, diceColor.mc_value)
                             print("New block for player", gTurn)
                             visibleLayers[gTurn] += 1
                     elif gTurn == 2:
-                        if diceColor in blocks2:
-                            mc.setBlock(-239, 71 + visibleLayers[gTurn], -19, 35, diceColor)
+                        if diceColor.mc_value in blocks2[visibleLayers[gTurn]:]:
+                            mc.setBlock(-239, 71 + visibleLayers[gTurn], -19, 35, diceColor.mc_value)
                             print("New block for player", gTurn)
                             visibleLayers[gTurn] += 1
                     elif gTurn == 3:
-                        if diceColor in blocks3:
-                            mc.setBlock(-249, 71 + visibleLayers[gTurn], -19, 35, diceColor)
+                        if diceColor.mc_value in blocks3[visibleLayers[gTurn]:]:
+                            mc.setBlock(-249, 71 + visibleLayers[gTurn], -19, 35, diceColor.mc_value)
                             print("New block for player", gTurn)
                             visibleLayers[gTurn] += 1
                     elif gTurn == 4:
-                        if diceColor in blocks4:
-                            mc.setBlock(-253, 71 + visibleLayers[gTurn], -12, 35, diceColor)
+                        if diceColor.mc_value in blocks4[visibleLayers[gTurn]:]:
+                            mc.setBlock(-253, 71 + visibleLayers[gTurn], -12, 35, diceColor.mc_value)
                             print("New block for player", gTurn)
                             visibleLayers[gTurn] += 1
                     elif gTurn == 5:
-                        if diceColor in blocks5:
-                            mc.setBlock(-249, 71 + visibleLayers[gTurn], -5, 35, diceColor)
+                        if diceColor.mc_value in blocks5[visibleLayers[gTurn]:]:
+                            mc.setBlock(-249, 71 + visibleLayers[gTurn], -5, 35, diceColor.mc_value)
                             print("New block for player", gTurn)
                             visibleLayers[gTurn] += 1
                     elif gTurn == 6:
-                        if diceColor in blocks6:
-                            mc.setBlock(-239, 71 + visibleLayers[gTurn], -5, 35, diceColor)
+                        if diceColor.mc_value in blocks6[visibleLayers[gTurn]:]:
+                            mc.setBlock(-239, 71 + visibleLayers[gTurn], -5, 35, diceColor.mc_value)
                             print("New block for player", gTurn)
                             visibleLayers[gTurn] += 1
                     turnDone = True
