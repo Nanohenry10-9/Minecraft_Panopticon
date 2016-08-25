@@ -1,19 +1,22 @@
-from mcpi.minecraft import Minecraft
-from time import sleep
-from random import randint
+#---------------------------------------Prepare-----------------------------------------
 
-mc = Minecraft.create()
-mc.setting("world_immutable", True)
+from mcpi.minecraft import Minecraft # Import Minecraft API
+from time import sleep # Import sleep() from time library
+from random import randint # import randint() from random library
 
-playersNeededToPlay = 2
+mc = Minecraft.create() # Create connection between code and world
+mc.setting("world_immutable", True) # Make the world immutable/mutable
+
+playersNeededToPlay = 3 # The number of players needed to play the game
+blocksToWin = 3
 
 
-class player:
-    class plr1:
-        role = 1
-        numOfBlocks = 0
+class player: # Create class "player"
+    class plr1: # Class player one
+        role = 1 # The role of the player
+        numOfBlocks = 0 # The amount of blocks the player has
 
-        class roleInfo:
+        class roleInfo: # This is a class for telling tha player that who is he/she
             class BH:
                 x = -234
                 y = 69
@@ -224,23 +227,23 @@ class player:
                 y = 69
                 z = -4
 
-mc.events.clearAll()
+mc.events.clearAll() # Clear all "click" events
 
 
-class gameOverText:
+class gameOverText: # For showing the Game Over text
     x = -228
     y = 68
     z = 33
 
 
-class welcomeText:
+class welcomeText: # For showing the Welcome to Panopticon text
     x = -228
     y = 68
     z = 29
 
-blocksY = 71  # Altitude of the board
+blocksY = 71  # Altitude of the board + 1
 
-blocks1X = [-230, -224, -224, -219, -217, -219, -214, -212, -212, -214]
+blocks1X = [-230, -224, -224, -219, -217, -219, -214, -212, -212, -214] # Locations of all blocks
 blocks1Z = [-12, -15, -9, -20, -12, -4, -23, -16, -8, -1]
 
 blocks2X = [-237, -237, -233, -238, -232, -228, -239, -234, -228, -223]
@@ -258,33 +261,40 @@ blocks5Z = [-1, 7, 4, 13, 10, 6, 19, 18, 15, 10]
 blocks6X = [-237, -233, -237, -228, -232, -238, -223, -228, -234, -239]
 blocks6Z = [-1, 4, 7, 6, 10, 13, 10, 15, 18, 19]
 
-throwDiceY = 73
+throwDiceY = 73 # Locations of "Throw dice signs"
 throwDiceX = [-236, -240, -248, -252, -248, -240]
 throwDiceZ = [-12, -18, -18, -12, -6, -5]
 
-blocks1 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+blocks1 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] # Blocks that players have
 blocks2 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks3 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks4 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks5 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 blocks6 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
-all_blocks = [blocks1, blocks2, blocks3, blocks4, blocks5, blocks6]
+all_blocks = [blocks1, blocks2, blocks3, blocks4, blocks5, blocks6] # All blocks
 
-visibleLayers = [1, 1, 1, 1, 1, 1]
+visibleLayers = [1, 1, 1, 1, 1, 1] # Visible layers
+blocksToSee = [1, 1, 1, 1, 1, 1]
 
-playerXPoses = [-235, -239, -249, -253, -249, -239]
+playerXPoses = [-235, -239, -249, -253, -249, -239] # Players positions (in the sectors)
 playerYPoses = 72
 playerZPoses = [-12, -19, -19, -12, -5, -5]
 
+redstone_block = 152
 
-def checkBlocks(player):
+mc.setBlocks(-235, 72, -12, -235, 79, -12, 0)
+mc.setBlocks(-239, 72, -19, -239, 79, -19, 0)
+mc.setBlocks(-249, 72, -19, -249, 79, -19, 0)
+
+
+def checkBlocks(player): # Function for checking if there are blocks on the tower
     if player == 1:
-        blocks1OnPlace1 = mc.getBlock(-235, 72, -12)
+        blocks1OnPlace1 = mc.getBlock(-235, 72, -12) # The coordinates of the towers bricks
         blocks1OnPlace2 = mc.getBlock(-235, 73, -12)
         blocks1OnPlace3 = mc.getBlock(-235, 74, -12)
-        if blocks1OnPlace1 == 0:
-            mc.setBlock(blocks1X[0], blocksY, blocks1Z[0], 35, blocks1[0])
+        if blocks1OnPlace1 == 0: # Check how many blocks are there on the tower 
+            mc.setBlock(blocks1X[0], blocksY, blocks1Z[0], 35, blocks1[0]) # Show the correct amount of blocks on the game board
         elif blocks1OnPlace1 == 35 and blocks1OnPlace2 == 0:
             for i in range(0, 3):
                 mc.setBlock(blocks1X[i], blocksY, blocks1Z[i], 35, blocks1[i])
@@ -310,7 +320,20 @@ def checkBlocks(player):
             for i in range(0, 10):
                 mc.setBlock(blocks2X[i], blocksY, blocks2Z[i], 35, blocks2[i])
     elif player == 3:
-        print("Not possible yet")
+        blocks3OnPlace1 = mc.getBlock(-249, 72, -19)
+        blocks3OnPlace2 = mc.getBlock(-249, 73, -19)
+        blocks3OnPlace3 = mc.getBlock(-249, 74, -19)
+        if blocks3OnPlace1 == 0:
+            mc.setBlock(blocks3X[0], blocksY, blocks3Z[0], 35, blocks3[0])
+        elif blocks3OnPlace1 == 35 and blocks3OnPlace2 == 0:
+            for i in range(0, 3):
+                mc.setBlock(blocks3X[i], blocksY, blocks3Z[i], 35, blocks3[i])
+        elif blocks2OnPlace1 == 35 and blocks2OnPlace2 == 35 and blocks2OnPlace3 == 0:
+            for i in range(0, 6):
+                mc.setBlock(blocks3X[i], blocksY, blocks3Z[i], 35, blocks3[i])
+        elif blocks3OnPlace1 == 35 and blocks3OnPlace2 == 35 and blocks3OnPlace3 == 35:
+            for i in range(0, 10):
+                mc.setBlock(blocks3X[i], blocksY, blocks3Z[i], 35, blocks3[i])
     elif player == 4:
         print("Not possible yet")
     elif player == 5:
@@ -319,8 +342,8 @@ def checkBlocks(player):
         print("Not possible yet")
 
 
-def getPlayerNum():
-    try:
+def getPlayerNum(): # Function for getting the number of players online
+    try: # Try/except is here because the mc.getPlayerEntityIds() function fails if there aren't any players online
         playerIds = mc.getPlayerEntityIds()
         return len(playerIds)
     except:
@@ -346,7 +369,7 @@ all_colors = [black, grey, blue, yellow, red, white, green]  # The position in t
 diceColor = Color(0, 0)
 
 
-def dice():
+def dice(): 
     mc.postToChat("Throwing the dice...")
     for color in [black.mc_value, green.mc_value, red.mc_value, yellow.mc_value, blue.mc_value, white.mc_value]:
         mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, color)
@@ -354,7 +377,7 @@ def dice():
     mc.postToChat("Alea iacta est! (The dice is thrown!)")
     color = all_colors[randint(1, 6)]
     mc.setBlocks(-244, 77, -12, -245, 78, -13, 35, color.mc_value)
-    return color
+    return color.mc_value
 
 
 def checkClicks(plr):
@@ -439,8 +462,6 @@ for i in range(1, 10):
     mc.setBlock(blocks5X[i], blocksY, blocks5Z[i], 0)
     mc.setBlock(blocks6X[i], blocksY, blocks6Z[i], 0)
 
-# "Game begin" -----------------------------------------------------------------------------------------------------
-
 players = getPlayerNum()
 while (players < playersNeededToPlay):
     print("Waiting for players")
@@ -449,25 +470,125 @@ while (players < playersNeededToPlay):
     mc.postToChat("Current players amount:")
     mc.postToChat(players)
     sleep(5)
-    playerIDs = mc.getPlayerEntityIds()
     players = getPlayerNum()
-    for i in range(0, players):
-        mc.player.setPos(playerIDs[i], -244, 80, -13)
-        mc.postToChat("Hello, ")
-        mc.postToChat(playerIDs[i])
+    try:
+        playerIDs = mc.getPlayerEntityIds()
+        for i in range(0, players):
+            mc.entity.setPos(playerIDs[i], -244, 80, -13)
+    except:
+        print("No players!")
 
 playerIDs = mc.getPlayerEntityIds()
+print(playerIDs)
 for i in range(0, playersNeededToPlay):
-    mc.player.setPos(playerIDs[i], playerXPoses[i], playerYPoses, playerZPoses[i])
+    print(playerIDs[i], playerXPoses[i], playerYPoses, playerZPoses[i])
+    print(mc.entity.getPos(playerIDs[i]))
+    mc.entity.setTilePos(playerIDs[i], playerXPoses[i], playerYPoses, playerZPoses[i])
+    print(mc.entity.getPos(playerIDs[i]))
+
+def calcBlocksToSee(a):
+    if a == 0:
+        return 1
+    elif a == 1:
+        return 3
+    elif a == 2:
+        return 6
+    elif a == 3:
+        return 10
+    else:
+        return 10
     
     
-    
+#------------------------------------Loop---------------------------------------
 
 mc.postToChat("Enough players to play the game!")
-print("Enough (6) players")
+print("Enough players!")
 
-mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 152)  # <-- Welcomes players
+mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, redstone_block)  # <-- Welcomes players
 mc.setBlock(welcomeText.x, welcomeText.y, welcomeText.z, 0)    # <-- This line is needed too!
+
+sleep(3)
+
+for x in range(0, players): # Tell who is who
+    if x == 0:
+        if player.plr1.role == 1:
+            mc.setBlock(player.plr1.roleInfo.BH.x, player.plr1.roleInfo.BH.y, player.plr1.roleInfo.BH.z, redstone_block)
+            mc.setBlock(player.plr1.roleInfo.BH.x, player.plr1.roleInfo.BH.y, player.plr1.roleInfo.BH.z, 0)
+        elif player.plr1.role == 2:
+            mc.setBlock(player.plr1.roleInfo.GH.x, player.plr1.roleInfo.GH.y, player.plr1.roleInfo.GH.z, redstone_block)
+            mc.setBlock(player.plr1.roleInfo.GH.x, player.plr1.roleInfo.GH.y, player.plr1.roleInfo.GH.z, 0)
+        elif player.plr1.role == 3:
+            mc.setBlock(player.plr1.roleInfo.AV.x, player.plr1.roleInfo.AV.y, player.plr1.roleInfo.AV.z, redstone_block)
+            mc.setBlock(player.plr1.roleInfo.AV.x, player.plr1.roleInfo.AV.y, player.plr1.roleInfo.AV.z, 0)
+        elif player.plr1.role == 4:
+            mc.setBlock(player.plr1.roleInfo.Tr.x, player.plr1.roleInfo.Tr.y, player.plr1.roleInfo.Tr.z, redstone_block)
+            mc.setBlock(player.plr1.roleInfo.Tr.x, player.plr1.roleInfo.Tr.y, player.plr1.roleInfo.Tr.z, 0)
+        elif player.plr1.role == 5:
+            mc.setBlock(player.plr1.roleInfo.Ac.x, player.plr1.roleInfo.Ac.y, player.plr1.roleInfo.Ac.z, redstone_block)
+            mc.setBlock(player.plr1.roleInfo.Ac.x, player.plr1.roleInfo.Ac.y, player.plr1.roleInfo.Ac.z, 0)
+        elif player.plr1.role == 6:
+            mc.setBlock(player.plr1.roleInfo.NGO.x, player.plr1.roleInfo.NGO.y, player.plr1.roleInfo.NGO.z, redstone_block)
+            mc.setBlock(player.plr1.roleInfo.NGO.x, player.plr1.roleInfo.NGO.y, player.plr1.roleInfo.NGO.z, 0)
+            
+    elif x == 1:
+        if player.plr2.role == 1:
+            mc.setBlock(player.plr2.roleInfo.BH.x, player.plr2.roleInfo.BH.y, player.plr2.roleInfo.BH.z, redstone_block)
+            mc.setBlock(player.plr2.roleInfo.BH.x, player.plr2.roleInfo.BH.y, player.plr2.roleInfo.BH.z, 0)
+        elif player.plr2.role == 2:
+            mc.setBlock(player.plr2.roleInfo.GH.x, player.plr2.roleInfo.GH.y, player.plr2.roleInfo.GH.z, redstone_block)
+            mc.setBlock(player.plr2.roleInfo.GH.x, player.plr2.roleInfo.GH.y, player.plr2.roleInfo.GH.z, 0)
+        elif player.plr2.role == 3:
+            mc.setBlock(player.plr2.roleInfo.AV.x, player.plr2.roleInfo.AV.y, player.plr2.roleInfo.AV.z, redstone_block)
+            mc.setBlock(player.plr2.roleInfo.AV.x, player.plr2.roleInfo.AV.y, player.plr2.roleInfo.AV.z, 0)
+        elif player.plr2.role == 4:
+            mc.setBlock(player.plr2.roleInfo.Tr.x, player.plr2.roleInfo.Tr.y, player.plr2.roleInfo.Tr.z, redstone_block)
+            mc.setBlock(player.plr2.roleInfo.Tr.x, player.plr2.roleInfo.Tr.y, player.plr2.roleInfo.Tr.z, 0)
+        elif player.plr2.role == 5:
+            mc.setBlock(player.plr2.roleInfo.Ac.x, player.plr2.roleInfo.Ac.y, player.plr2.roleInfo.Ac.z, redstone_block)
+            mc.setBlock(player.plr2.roleInfo.Ac.x, player.plr2.roleInfo.Ac.y, player.plr2.roleInfo.Ac.z, 0)
+        elif player.plr2.role == 6:
+            mc.setBlock(player.plr2.roleInfo.NGO.x, player.plr2.roleInfo.NGO.y, player.plr2.roleInfo.NGO.z, redstone_block)
+            mc.setBlock(player.plr2.roleInfo.NGO.x, player.plr2.roleInfo.NGO.y, player.plr2.roleInfo.NGO.z, 0)
+
+    elif x == 2:
+        if player.plr3.role == 1:
+            mc.setBlock(player.plr3.roleInfo.BH.x, player.plr3.roleInfo.BH.y, player.plr3.roleInfo.BH.z, redstone_block)
+            mc.setBlock(player.plr3.roleInfo.BH.x, player.plr3.roleInfo.BH.y, player.plr3.roleInfo.BH.z, 0)
+        elif player.plr3.role == 2:
+            mc.setBlock(player.plr3.roleInfo.GH.x, player.plr3.roleInfo.GH.y, player.plr3.roleInfo.GH.z, redstone_block)
+            mc.setBlock(player.plr3.roleInfo.GH.x, player.plr3.roleInfo.GH.y, player.plr3.roleInfo.GH.z, 0)
+        elif player.plr3.role == 3:
+            mc.setBlock(player.plr3.roleInfo.AV.x, player.plr3.roleInfo.AV.y, player.plr3.roleInfo.AV.z, redstone_block)
+            mc.setBlock(player.plr3.roleInfo.AV.x, player.plr3.roleInfo.AV.y, player.plr3.roleInfo.AV.z, 0)
+        elif player.plr3.role == 4:
+            mc.setBlock(player.plr3.roleInfo.Tr.x, player.plr3.roleInfo.Tr.y, player.plr3.roleInfo.Tr.z, redstone_block)
+            mc.setBlock(player.plr3.roleInfo.Tr.x, player.plr3.roleInfo.Tr.y, player.plr3.roleInfo.Tr.z, 0)
+        elif player.plr3.role == 5:
+            mc.setBlock(player.plr3.roleInfo.Ac.x, player.plr3.roleInfo.Ac.y, player.plr3.roleInfo.Ac.z, redstone_block)
+            mc.setBlock(player.plr3.roleInfo.Ac.x, player.plr3.roleInfo.Ac.y, player.plr3.roleInfo.Ac.z, 0)
+        elif player.plr3.role == 6:
+            mc.setBlock(player.plr3.roleInfo.NGO.x, player.plr3.roleInfo.NGO.y, player.plr3.roleInfo.NGO.z, redstone_block)
+            mc.setBlock(player.plr3.roleInfo.NGO.x, player.plr3.roleInfo.NGO.y, player.plr3.roleInfo.NGO.z, 0)
+
+    elif x == 4:
+        if player.plr4.role == 1:
+            mc.setBlock(player.plr4.roleInfo.BH.x, player.plr4.roleInfo.BH.y, player.plr4.roleInfo.BH.z, redstone_block)
+            mc.setBlock(player.plr4.roleInfo.BH.x, player.plr4.roleInfo.BH.y, player.plr4.roleInfo.BH.z, 0)
+        elif player.plr4.role == 2:
+            mc.setBlock(player.plr4.roleInfo.GH.x, player.plr4.roleInfo.GH.y, player.plr4.roleInfo.GH.z, redstone_block)
+            mc.setBlock(player.plr4.roleInfo.GH.x, player.plr4.roleInfo.GH.y, player.plr4.roleInfo.GH.z, 0)
+        elif player.plr4.role == 3:
+            mc.setBlock(player.plr4.roleInfo.AV.x, player.plr4.roleInfo.AV.y, player.plr4.roleInfo.AV.z, redstone_block)
+            mc.setBlock(player.plr4.roleInfo.AV.x, player.plr4.roleInfo.AV.y, player.plr4.roleInfo.AV.z, 0)
+        elif player.plr4.role == 4:
+            mc.setBlock(player.plr4.roleInfo.Tr.x, player.plr4.roleInfo.Tr.y, player.plr4.roleInfo.Tr.z, redstone_block)
+            mc.setBlock(player.plr4.roleInfo.Tr.x, player.plr4.roleInfo.Tr.y, player.plr4.roleInfo.Tr.z, 0)
+        elif player.plr4.role == 5:
+            mc.setBlock(player.plr4.roleInfo.Ac.x, player.plr4.roleInfo.Ac.y, player.plr4.roleInfo.Ac.z, redstone_block)
+            mc.setBlock(player.plr4.roleInfo.Ac.x, player.plr4.roleInfo.Ac.y, player.plr4.roleInfo.Ac.z, 0)
+        elif player.plr4.role == 6:
+            mc.setBlock(player.plr4.roleInfo.NGO.x, player.plr4.roleInfo.NGO.y, player.plr4.roleInfo.NGO.z, redstone_block)
+            mc.setBlock(player.plr4.roleInfo.NGO.x, player.plr4.roleInfo.NGO.y, player.plr4.roleInfo.NGO.z, 0)
 
 print("Entering the game loop...")
 gRound = 1
@@ -476,63 +597,80 @@ gTurn = 1
 turnDone = False
 someoneWon = False
 while not someoneWon:
-    for gRound in range(1, 11):
-        textToChat = "Round:", gRound
-        mc.postToChat(textToChat)
-        print(textToChat)
-        for gTurn in range(1, 7):
-            turnDone = False
-            while not turnDone:
-                if gTurn != oldGTurn:
-                    textToChat = "Turn:", gTurn
-                    mc.postToChat(textToChat)
-                    print(textToChat)
-                    oldGTurn = gTurn
-                checkBlocks(gTurn)
-                plrWantsToDo = checkClicks(gTurn)
+    textToChat = "Round:", gRound
+    mc.postToChat(textToChat)
+    print(textToChat)
+    for gTurn in range(1, 7):
+        turnDone = False
+        while not turnDone:
+            if gTurn != oldGTurn:
+                 textToChat = "Turn:", gTurn
+                 mc.postToChat(textToChat)
+                 print(textToChat)
+                 oldGTurn = gTurn
+            checkBlocks(gTurn)
+            plrWantsToDo = checkClicks(gTurn)
 
-                if gTurn >= 3:           # For testing
-                    plrWantsToDo = 0     # This too
+            if gTurn > playersNeededToPlay: # For skipping the not-playing players (or their turn, because they're not present)
+                plrWantsToDo = 0
+                mc.postToChat("Skipping turn...")
                     
-                if plrWantsToDo == 1:
-                    diceColor.mc_value = dice()
-                    if gTurn == 1:
-                        if diceColor.mc_value in blocks1[visibleLayers[gTurn]:]:
-                            mc.setBlock(-235, 71 + visibleLayers[gTurn], -12, 35, diceColor.mc_value)
-                            print("New block for player", gTurn)
-                            visibleLayers[gTurn] += 1
-                    elif gTurn == 2:
-                        if diceColor.mc_value in blocks2[visibleLayers[gTurn]:]:
-                            mc.setBlock(-239, 71 + visibleLayers[gTurn], -19, 35, diceColor.mc_value)
-                            print("New block for player", gTurn)
-                            visibleLayers[gTurn] += 1
-                    elif gTurn == 3:
-                        if diceColor.mc_value in blocks3[visibleLayers[gTurn]:]:
-                            mc.setBlock(-249, 71 + visibleLayers[gTurn], -19, 35, diceColor.mc_value)
-                            print("New block for player", gTurn)
-                            visibleLayers[gTurn] += 1
-                    elif gTurn == 4:
-                        if diceColor.mc_value in blocks4[visibleLayers[gTurn]:]:
-                            mc.setBlock(-253, 71 + visibleLayers[gTurn], -12, 35, diceColor.mc_value)
-                            print("New block for player", gTurn)
-                            visibleLayers[gTurn] += 1
-                    elif gTurn == 5:
-                        if diceColor.mc_value in blocks5[visibleLayers[gTurn]:]:
-                            mc.setBlock(-249, 71 + visibleLayers[gTurn], -5, 35, diceColor.mc_value)
-                            print("New block for player", gTurn)
-                            visibleLayers[gTurn] += 1
-                    elif gTurn == 6:
-                        if diceColor.mc_value in blocks6[visibleLayers[gTurn]:]:
-                            mc.setBlock(-239, 71 + visibleLayers[gTurn], -5, 35, diceColor.mc_value)
-                            print("New block for player", gTurn)
-                            visibleLayers[gTurn] += 1
-                    turnDone = True
+            if plrWantsToDo == 1:
+                diceColor.mc_value = dice()
+                if gTurn == 1:
+                    print(blocks1[:blocksToSee[gTurn]])
+                    if diceColor.mc_value in blocks1[:blocksToSee[gTurn]]:
+                        mc.setBlock(-235, 71 + visibleLayers[gTurn], -12, 35, diceColor.mc_value)
+                        print("New block for player", gTurn)
+                        mc.player.setPos(playerIDs[-1], -235, 72 + visibleLayers[gTurn], -12)
+                        visibleLayers[gTurn] += 1
+                        blocksToSee[gTurn - 1] = calcBlocksToSee(visibleLayers[gTurn])
+                elif gTurn == 2:
+                    if diceColor.mc_value in blocks2[:blocksToSee[gTurn]]:
+                        mc.setBlock(-239, 71 + visibleLayers[gTurn], -19, 35, diceColor.mc_value)
+                        print("New block for player", gTurn)
+                        mc.player.setPos(playerIDs[-1], -235, 72 + visibleLayers[gTurn], -12)
+                        visibleLayers[gTurn] += 1
+                        blocksToSee[gTurn - 1] = calcBlocksToSee(visibleLayers[gTurn])
+                elif gTurn == 3:
+                    if diceColor.mc_value in blocks3[:blocksToSee[gTurn]]:
+                        mc.setBlock(-249, 71 + visibleLayers[gTurn], -19, 35, diceColor.mc_value)
+                        print("New block for player", gTurn)
+                        mc.player.setPos(playerIDs[-1], -235, 72 + visibleLayers[gTurn], -12)
+                        visibleLayers[gTurn] += 1
+                        blocksToSee[gTurn - 1] = calcBlocksToSee(visibleLayers[gTurn])
+                elif gTurn == 4:
+                    if diceColor.mc_value in blocks4[:blocksToSee[gTurn]]:
+                        mc.setBlock(-253, 71 + visibleLayers[gTurn], -12, 35, diceColor.mc_value)
+                        print("New block for player", gTurn)
+                        mc.player.setPos(playerIDs[-1], -235, 72 + visibleLayers[gTurn], -12)
+                        visibleLayers[gTurn] += 1
+                        blocksToSee[gTurn - 1] = calcBlocksToSee(visibleLayers[gTurn])
+                elif gTurn == 5:
+                    if diceColor.mc_value in blocks5[:blocksToSee[gTurn]]:
+                        mc.setBlock(-249, 71 + visibleLayers[gTurn], -5, 35, diceColor.mc_value)
+                        print("New block for player", gTurn)
+                        mc.player.setPos(playerIDs[-1], -235, 72 + visibleLayers[gTurn], -12)
+                        visibleLayers[gTurn] += 1
+                        blocksToSee[gTurn - 1] = calcBlocksToSee(visibleLayers[gTurn])
+                elif gTurn == 6:
+                    if diceColor.mc_value in blocks6[:blocksToSee[gTurn]]:
+                        mc.setBlock(-239, 71 + visibleLayers[gTurn], -5, 35, diceColor.mc_value)
+                        print("New block for player", gTurn)
+                        mc.player.setPos(playerIDs[-1], -235, 72 + visibleLayers[gTurn], -12)
+                        visibleLayers[gTurn] += 1
+                        blocksToSee[gTurn - 1] = calcBlocksToSee(visibleLayers[gTurn])
+                turnDone = True
 
-                elif plrWantsToDo == 0:
-                    turnDone = True
-                sleep(0.2)
-    someoneWon = True
+            elif plrWantsToDo == 0:
+                turnDone = True
+            sleep(0.2)
+        if visibleLayers[0] >= blocksToWin or visibleLayers[1] >= blocksToWin or visibleLayers[2] >= blocksToWin or visibleLayers[3] >= blocksToWin or visibleLayers[4] >= blocksToWin or visibleLayers[5] >= blocksToWin:
+            someoneWon = True
+        gRound = gRound + 1
+
+#---------------------------------Game Over------------------------------------
 
 print("Game Over")
-mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 152)  # <-- When game is over
+mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, redstone_block)  # <-- When game is over
 mc.setBlock(gameOverText.x, gameOverText.y, gameOverText.z, 0)    # <-- This line too!
